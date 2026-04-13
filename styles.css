@@ -1,1 +1,27 @@
-/* Add Global styles here */
+body {
+    background-color: gray;
+
+}
+
+h1 {
+    text-align: center;
+}
+
+.tile {
+      width: 50px;
+    height: 50px;
+    border: 2px solid #d3d6da;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.gameboard {
+    display: grid;
+     grid-auto-flow: column;
+    grid-template-columns: repeat(6, 5fr);
+    gap: 5px;
+    width: 300px;
+}
