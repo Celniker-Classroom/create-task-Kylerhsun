@@ -1,13 +1,6 @@
 <!-- 
-  <h1>Wordle</h1> 
-  <div id = gameboard>
-    5 tiles in row 6 tiles in column
-  </div>
-  <div id = keyboard>
-    keyboard from A-Z and backspace
-  </div>
-  <div id = replay> replay button that is hidden until round is lost or beaten</div>
-
+ I will be creating Wordle with a limited amount of words in the wordbank using mainly CSS for the layout
+ Using javascript for the button presses, functions, replay button, etc.
 -->
 
 <!DOCTYPE html>
@@ -19,8 +12,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+
+    
     <h1>Wordle</h1>
     <div class = "gameboard">
+
+        <div class = "game-container">
+
+            <div class = "popup">Not in the Word List</div>
     
         <div class = "board-row">
             <div class = "tile"></div>
@@ -62,16 +62,22 @@
             <div class = "tile"></div>
         </div>
 
-        <div class = "board-row">
+        <div class = "board-row" id = "last-row">
             <div class = "tile"></div>
             <div class = "tile"></div>
             <div class = "tile"></div>
             <div class = "tile"></div>
             <div class = "tile"></div>
     </div>
+
+    </div>
+
 </div>
 
+
     <div id = "keyboard">
+
+    <div class = "kb-container">
 
     <div class = "row">
         <button class="key">Q</button>
@@ -86,7 +92,7 @@
         <button class="key">P</button>
     </div>
 
-    <div class = "row">
+    <div class = "row" id = "middle-kb-row">
         <button class="key">A</button>
         <button class="key">S</button>
         <button class="key">D</button>
@@ -107,10 +113,14 @@
         <button class="key">B</button>
         <button class="key">N</button>
         <button class="key">M</button>
-        <button class="key">Delete</button>
+        <button class="key">Del</button>
+    </div>
+
+ <div class = "replay"  onclick = "replay()"><button>Replay</button></div>
+
     </div>
 
     </div>
-    <div id = "replay">Replay</div>
+   
 </body>
 </html>
