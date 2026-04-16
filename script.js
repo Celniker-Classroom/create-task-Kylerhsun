@@ -11,15 +11,17 @@ guessList = guessList.concat(wordList);
 
 let word = wordList[Math.floor(Math.random()*wordList.length)].toUpperCase();
 
+
+
 createBoard();
 
 
 function createBoard () {
-   for (let r = 0; r < height; r++) {
-        for (let c = 0; c < width; c++) {
+   for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
          
             let tile = document.createElement("span");
-            tile.id = r.toString() + "-" + c.toString();
+            tile.id = i.toString() + "-" + j.toString();
             tile.classList.add("tile");
             tile.innerText = "";
             document.getElementById("board").appendChild(tile);
@@ -29,7 +31,7 @@ function createBoard () {
  
 
 
-    document.addEventListener("keyup", (e) => {
+    document.addEventListener("keydown", (e) => {
         if (gameOver) return; 
 
     
@@ -52,39 +54,85 @@ function createBoard () {
 
         else if (e.code == "Enter") {
             update();
-            row += 1; 
-            col = 0; 
         }
 
 
         if (!gameOver && row == height) {
             gameOver = true;
-            document.getElementById("answer").innerText = word;
+            document.getElementById("answer").innerText = "The word was " + word;
         }
 
     })
-}
+
+    let keyboard = [
+        ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+        ["A", "S", "D", "F", "G", "H", "J", "K", "L", " "],
+        ["Enter", "Z", "X", "C", "V", "B", "N", "M", "⌫" ]
+    ]
+    function generateKeyboard () {
+
+    }
+    }
 
 function update() {
     let correct = 0;
-    for (let c = 0; c < width; c++) {
-        let currentTile = document.getElementById(row.toString() + "-" + c.toString());
+    let letterCount = [];
+    let guess = "";
+    
+
+    for (let i = 0; i < width; i++) {
+        currentTile = document.getElementById(row.toString() + "-" + i.toString())
         let letter = currentTile.innerText;
-
-        if (word[c] == letter) {
-            currentTile.classList.add("correct");
-            correct += 1;
-        } 
-        else if (word.includes(letter)) {
-            currentTile.classList.add("present");
-        } 
-        else {
-            currentTile.classList.add("absent");
-        }
-
-        if (correct == width) {
-            gameOver = true;
-        }
-
+        guess += letter;
     }
+
+    guess = guess.toLowerCase();
+    
+    if (!guessList.includes(guess)) {
+        alert('Not in Word List!')
+        return;
+    }
+    
+    
+        for (let i = 0; i < word.length; i++) {
+            let letter =word[i];
+            if (letterCount[letter]) {
+                letterCount[letter] += 1;
+            }
+            else {
+                letterCount[letter] = 1;
+            }
+        }
+        
+        for (let i = 0; i < width; i++) {
+            let currentTile = document.getElementById(row.toString() + "-" + i.toString());
+            let letter = currentTile.innerText;
+
+            if (word[i] == letter) {
+                currentTile.classList.add("correct");
+                correct += 1;
+                letterCount[letter] -= 1;
+            } 
+            if (correct == width) {
+                gameOver = true;
+            }
+
+        }
+
+
+        for (let i = 0; i < width; i++) {
+            let currentTile = document.getElementById(row.toString() + "-" + i.toString());
+            let letter = currentTile.innerText; 
+            if (!currentTile.classList.contains("correct"))  {
+                if (word.includes(letter) && letterCount[letter] > 0) {
+                    currentTile.classList.add("present");
+                    letterCount[letter] -= 1;
+                } 
+                else {
+                    currentTile.classList.add("absent");
+                }
+        }
+    }
+    row += 1; 
+    col = 0; 
 }

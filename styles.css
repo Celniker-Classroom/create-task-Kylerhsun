@@ -6,6 +6,11 @@ h1 {
     text-align: center;
 }
 
+p {
+    text-align: center;
+    font-size: 36px;
+}
+
 #board {
     width: 350px;
     height: 420px;
@@ -16,39 +21,34 @@ h1 {
 }
 
 .tile {
-    border: 2px solid lightgray;
+    border: 2px solid darkslategray;
     width: 60px;
     height: 60px;
     margin: 2.5px;
 
     color: black;
     font-size: 36px;
-    font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#title {
-    font-size: 36px;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
 
 .correct {
     background-color: #6AAA64;
     color: white;
-    border-color: white;
+    border-color: black;
 }
 
 .present {
     background-color: #C9B458;
     color: white;
-    border-color: white;
+    border-color: black;
 }
 
 .absent {
     background-color: #787C7E;
     color: white;
-    border-color:white;
+    border-color:black;
 }
+
