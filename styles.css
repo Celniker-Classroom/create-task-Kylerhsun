@@ -94,9 +94,16 @@ p {
 
 
 .replay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#button {
+    background-color: rgb(77, 189, 77);
+    margin: 20px;
+    border: black solid 2px;
+    border-radius: 10px;
 }
 
 
