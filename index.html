@@ -21,6 +21,23 @@
         <br>
         <p id="answer">What is the word?</p>
         <div id = "snackbar">Not in the Word List!</div>
-        <div class = "replay"><button id = "button" onclick = "restartGame()">REPLAY↺</button></div>
+        <div class = "replay"><button id = "button" onclick = "restartGame()">REPLAY↺</button> <button onclick="showStats()">Stats</button></div>
+        
+        <div id="statspage" class="stats">
+            <div class="stat">
+                <span class="close"></span>
+                <h2>Stats</h2>
+                <p>Wins: <span id="winsCount">0</span></p>
+                <p>Give-ups: <span id="giveUpsCount">0</span></p>
+                <h1></h1>
+                <p>1: <span id="tries1">0</span></p>
+                <p>2: <span id="tries2">0</span></p>
+                <p>3: <span id="tries3">0</span></p>
+                <p>4: <span id="tries4">0</span></p>
+                <p>5: <span id="tries5">0</span></p>
+                <p>6: <span id="tries6">0</span></p>
+            </div>
+        </div>
+        <p>press the "control" key to restart the game</p>
     </body>
 </html>
