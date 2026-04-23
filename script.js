@@ -138,61 +138,73 @@ function update() {
         }
     }
 
-
     for (let i = 0; i < width; i++) {
         let currentTile = document.getElementById(row.toString() + "-" + i.toString());
-        let letter = currentTile.innerText;
-        if (evaluateLetter(letter, i, letterCount) == "correct") {
-            currentTile.classList.add("correct");
-            let keyTile = document.getElementById("Key" + letter);
-            keyTile.classList.remove("present");
-            keyTile.classList.add("correct");
-            correct += 1;
-            letterCount[letter] -= 1;
-        }
+        currentTile.classList.add("flip");
     }
 
-    if (correct == width) {
-        gameOver = true;
-        wins += 1;
-        let attempts = row + 1;
-        if (attempts == 1) tries1++;
-        else if (attempts == 2) tries2++;
-        else if (attempts == 3) tries3++;
-        else if (attempts == 4) tries4++;
-        else if (attempts == 5) tries5++;
-        else if (attempts == 6) tries6++;
-    }
-    for (let index = 0; index < width; index++) {
-        let currentTile = document.getElementById(row.toString() + "-" + index.toString());
-        let letter = currentTile.innerText;
-        if (!currentTile.classList.contains("correct")) {
-            let result = evaluateLetter(letter, index, letterCount);
-            if (result == "present") {
-                currentTile.classList.add("present");
+    setTimeout(() => {
+        for (let i = 0; i < width; i++) {
+            let currentTile = document.getElementById(row.toString() + "-" + i.toString());
+            let letter = currentTile.innerText;
+            if (evaluateLetter(letter, i, letterCount) == "correct") {
+                currentTile.classList.add("correct");
                 let keyTile = document.getElementById("Key" + letter);
-                if (!keyTile.classList.contains("correct")) {
-                    keyTile.classList.add("present");
-                }
+                keyTile.classList.remove("present");
+                keyTile.classList.add("correct");
+                correct += 1;
                 letterCount[letter] -= 1;
-            } else {
-                currentTile.classList.add("absent");
-                let keyTile = document.getElementById("Key" + letter);
-                if (!keyTile.classList.contains("correct") && !keyTile.classList.contains("present")) {
-                    keyTile.classList.add("absent");
+            }
+        }
+
+        if (correct == width) {
+            gameOver = true;
+            wins += 1;
+            let attempts = row + 1;
+            if (attempts == 1) tries1++;
+            else if (attempts == 2) tries2++;
+            else if (attempts == 3) tries3++;
+            else if (attempts == 4) tries4++;
+            else if (attempts == 5) tries5++;
+            else if (attempts == 6) tries6++;
+            alert("Congratulations! You guessed the word in " + attempts.toString() + " tries!");
+        }
+        for (let index = 0; index < width; index++) {
+            let currentTile = document.getElementById(row.toString() + "-" + index.toString());
+            let letter = currentTile.innerText;
+            if (!currentTile.classList.contains("correct")) {
+                let result = evaluateLetter(letter, index, letterCount);
+                if (result == "present") {
+                    currentTile.classList.add("present");
+                    let keyTile = document.getElementById("Key" + letter);
+                    if (!keyTile.classList.contains("correct")) {
+                        keyTile.classList.add("present");
+                    }
+                    letterCount[letter] -= 1;
+                } else {
+                    currentTile.classList.add("absent");
+                    let keyTile = document.getElementById("Key" + letter);
+                    if (!keyTile.classList.contains("correct") && !keyTile.classList.contains("present")) {
+                        keyTile.classList.add("absent");
+                    }
                 }
             }
         }
-    }
 
-    row += 1;
-    col = 0;
+        for (let i = 0; i < width; i++) {
+            let currentTile = document.getElementById(row.toString() + "-" + i.toString());
+            currentTile.classList.remove("flip");
+        }
 
-    if (!gameOver && row == height) {
-        gameOver = true;
-        document.getElementById("answer").innerText = "The word was " + word;
-        giveUps += 1;
-    }
+        row += 1;
+        col = 0;
+
+        if (!gameOver && row == height) {
+            gameOver = true;
+            document.getElementById("answer").innerText = "The word was " + word;
+            giveUps += 1;
+        }
+    }, 600);
 }
 
 
